@@ -60,16 +60,16 @@ H = []; a = H.append
 
 a(f"""<h1>Predicting High Electricity Use in Sri Lankan Households<br>with an Explainable Boosting Machine</h1>
 <div class='meta'>Applied Machine Learning: Assignment Report<br><b>H.M.N.I.K. Herath</b> · Index number 269115L · MSc in Artificial Intelligence, University of Moratuwa<br>
-Code: <a href='{GH}'>{GH}</a><br>Live app: <a href='{APP}'>{APP}</a><br>Demo video: [link]</div>
+Code: <a href='{GH}'>{GH}</a><br>Live app: <a href='{APP}'>{APP}</a></div>
 <div class='abstract'><b>Summary.</b> Using a real survey of {S['households_used']:,} Sri Lankan households linked to their electricity-provider records (ReCon SL),
 this project predicts, from survey answers alone, whether a household's typical monthly consumption exceeds {THRESHOLD_UNITS} kWh, the domestic tariff
-boundary above which the unit price and fixed charge rise sharply. An <b>Explainable Boosting Machine (EBM)</b>, which was not covered in the lectures,
+boundary above which the unit price and fixed charge rise sharply. An <b>Explainable Boosting Machine (EBM)</b>
 reaches a test ROC-AUC of <b>{E['ROC-AUC']:.3f}</b> (95% CI {E['AUC CI low']:.3f}–{E['AUC CI high']:.3f}). That is statistically indistinguishable from
 random forest, XGBoost, LightGBM and logistic regression, and clearly better than a decision tree, while being fully interpretable and overfitting far less than the tree ensembles.
 Its explanations are cross-checked with SHAP and LIME.</div>""")
 
 # ---------------------------------------------------------------- 1
-a(f"""<h2>1. Problem definition and dataset <span class='marks'>(15)</span></h2>
+a(f"""<h2>1. Problem definition and dataset</h2>
 <h3>1.1 Problem</h3>
 <p>Sri Lanka's domestic electricity tariff is block-based. Under the PUCSL domestic tariff, consumption above {THRESHOLD_UNITS} units a month moves a household
 into blocks with a much higher unit charge and fixed charge [6]. Utilities (CEB, LECO) and energy-efficiency or solar programmes want to know <i>which</i>
@@ -99,14 +99,14 @@ socio-economic class (SEC A–E) and service area.</p>
 
 # ---------------------------------------------------------------- 2
 p = R["ebm_params"]
-a(f"""<h2>2. Selected algorithm: Explainable Boosting Machine <span class='marks'>(15)</span></h2>
+a(f"""<h2>2. Selected algorithm: Explainable Boosting Machine</h2>
 <p>The EBM [2, 3] is a <b>generalised additive model with pairwise interactions</b> (GA²M), trained with gradient boosting:</p>
 <p style='text-align:center'><i>logit P(y = 1 | x) = β₀ + Σ<sub>j</sub> f<sub>j</sub>(x<sub>j</sub>) + Σ<sub>(i,j)</sub> f<sub>ij</sub>(x<sub>i</sub>, x<sub>j</sub>)</i></p>
 <ul><li><b>Cyclic boosting:</b> features are binned; in each round, a very shallow tree is fitted on <i>one feature at a time</i> to the current residuals,
 with a small learning rate, cycling through all features for thousands of rounds. Each feature's trees sum into its own shape function f<sub>j</sub>.</li>
 <li><b>Interactions:</b> after the main effects, the FAST heuristic ranks feature pairs, and the top pairs get 2-D shape functions f<sub>ij</sub>.</li>
 <li><b>Bagging:</b> the whole procedure is repeated on bootstrap samples ("outer bags") and averaged, which smooths the shapes and gives confidence bands.</li></ul>
-<p><b>How it differs from the taught models.</b> Gradient boosting, XGBoost and LightGBM grow trees over all features jointly, so the result is a black box
+<p><b>How it differs from other models.</b> Gradient boosting, XGBoost and LightGBM grow trees over all features jointly, so the result is a black box
 that needs SHAP or LIME to explain. Logistic regression is additive but linear. The EBM keeps the additive, exactly decomposable structure of a GAM while learning
 non-linear shapes like a boosted model: each prediction is the exact sum of per-feature contributions, so its explanations are the model itself, not an approximation.</p>
 <p><b>Why it suits this problem.</b> Energy advice must be explainable to households and programme staff ("your four ACs used 40 hours a week add X"), the features are
@@ -120,10 +120,10 @@ m = m.map(f3)
 pr = pairs.copy(); pr["95% CI"] = [f"{l:.3f} to {h:.3f}" for l, h in zip(pr["CI low"], pr["CI high"])]
 pr = pr[["dAUC (EBM - model)", "95% CI", "significant"]].rename(columns={"dAUC (EBM - model)": "ΔAUC (EBM − model)"})
 pr["ΔAUC (EBM − model)"] = pr["ΔAUC (EBM − model)"].map(lambda v: f"{v:+.3f}"); pr["significant"] = pr["significant"].map({True: "yes", False: "no"})
-a(f"""<h2>3. Model training and evaluation <span class='marks'>(20)</span></h2>
+a(f"""<h2>3. Model training and evaluation</h2>
 <p><b>Split:</b> stratified 70 / 10 / 20: train {S['split']['train']['rows']:,}, validation {S['split']['val']['rows']:,}, test {S['split']['test']['rows']:,} households
 (each {pc(S['split']['test']['high_user_rate'], 1)} positive). The test set was used once, at the end.</p>
-<p><b>Tuning:</b> randomised search with 5-fold stratified cross-validation on the training set, optimising ROC-AUC, for the EBM and five taught models
+<p><b>Tuning:</b> randomised search with 5-fold stratified cross-validation on the training set, optimising ROC-AUC, for the EBM and five comparison models
 (logistic regression, decision tree, random forest, XGBoost, LightGBM). All preprocessing sits inside each pipeline, so no fold sees statistics from another.
 <b>Metrics:</b> ROC-AUC (threshold-free ranking quality, the primary metric), accuracy, precision, recall and F1 at threshold 0.5, Brier score (calibration);
 95% confidence intervals and paired EBM-vs-model differences from {500} bootstrap resamples of the test set.</p>
@@ -142,7 +142,7 @@ top5 = [L.get(t, t) for t in imp.index if "&" not in t][:5]
 lab = lambda t: " × ".join(L.get(x.strip(), x.strip()) for x in t.split("&"))
 loc = R["local"]
 ck_html = "".join(f"<li>{'✔' if v else '✘'} {k}</li>" for k, v in ck.items())
-a(f"""<h2>4. Explainability and interpretation <span class='marks'>(20)</span></h2>
+a(f"""<h2>4. Explainability and interpretation</h2>
 <p>Three complementary methods are used: the EBM's own exact explanations (global importance, shape functions, interactions, local contributions),
 <b>SHAP</b> [4] (TreeSHAP on LightGBM, the strongest black box) and <b>LIME</b> [5] (local surrogate on the EBM, to test whether a model-agnostic method recovers the exact answer).</p>
 <h3>4.1 Global behaviour</h3>
@@ -170,7 +170,7 @@ pattern in the data, but it is not a causal effect of installing solar, and the 
 fa = fair.copy()
 for c in ["actual high-user rate", "predicted rate", "recall", "precision", "AUC"]:
     fa[c] = fa[c].map(f3)
-a(f"""<h2>5. Critical discussion <span class='marks'>(10)</span></h2>
+a(f"""<h2>5. Critical discussion</h2>
 <p><b>Strengths.</b> Real, recent Sri Lankan data with an outcome from provider records rather than self-report; a strict timing rule; and a model that is as accurate as the best black box,
 overfits less, and gives exact explanations that domain checks and SHAP confirm.</p>
 <p><b>Limitations.</b></p>
@@ -187,7 +187,7 @@ The EBM makes this visible: the SEC term can be inspected or removed, which a bl
 <p><b>Real-world impact.</b> A utility or a solar/efficiency programme could screen applicants with a short form and explain to each household which appliances drive its predicted use, a concrete, trustworthy message in a period of high tariffs.</p>""")
 
 # ---------------------------------------------------------------- 6
-a(f"""<h2>6. Front end <span class='marks'>(bonus)</span></h2>
+a(f"""<h2>6. Front end</h2>
 <p>A Streamlit app (<code>app.py</code>) is deployed on <b>Azure Container Apps</b> at <a href='{APP}'>{APP}</a>. A Docker image is built by GitHub Actions and published to the GitHub Container Registry.
 Users choose any of the six models, start from a real test household or a blank form, edit the answers and get the prediction with an explanation (EBM exact, SHAP or LIME).
 Other tabs show the model comparison, the EBM's global behaviour, and the ethics and fairness notes.</p>
