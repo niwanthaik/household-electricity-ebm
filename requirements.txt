@@ -1,0 +1,14 @@
+joblib==1.6.0
+lightgbm==4.7.0
+lime==0.2.0.1
+matplotlib==3.11.2
+numpy==2.5.3
+pandas==3.0.5
+playwright==1.56.0
+pyarrow==25.0.1
+scikit-learn==1.9.1
+scipy==1.18.1
+shap==0.54.1
+streamlit==1.65.0
+xgboost==3.4.1
+interpret-core==0.7.8

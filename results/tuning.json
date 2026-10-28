@@ -1,0 +1,68 @@
+{
+ "Logistic Regression": {
+  "cv_auc": 0.7907,
+  "cv_auc_sd": 0.0141,
+  "best_params": {
+   "m__C": 0.05342937261279776
+  },
+  "seconds": 4
+ },
+ "Decision Tree": {
+  "cv_auc": 0.7608,
+  "cv_auc_sd": 0.0106,
+  "best_params": {
+   "m__max_depth": 6,
+   "m__min_samples_leaf": 79
+  },
+  "seconds": 5
+ },
+ "Random Forest": {
+  "cv_auc": 0.795,
+  "cv_auc_sd": 0.0152,
+  "best_params": {
+   "m__max_depth": 10,
+   "m__max_features": "sqrt",
+   "m__min_samples_leaf": 4
+  },
+  "seconds": 157
+ },
+ "XGBoost": {
+  "cv_auc": 0.7956,
+  "cv_auc_sd": 0.0123,
+  "best_params": {
+   "m__colsample_bytree": 0.7247253370691017,
+   "m__learning_rate": 0.013308570925867966,
+   "m__max_depth": 6,
+   "m__min_child_weight": 3,
+   "m__reg_lambda": 2.294002811785189,
+   "m__subsample": 0.7098887171960256
+  },
+  "seconds": 50
+ },
+ "LightGBM": {
+  "cv_auc": 0.7945,
+  "cv_auc_sd": 0.0116,
+  "best_params": {
+   "m__colsample_bytree": 0.7200762468698007,
+   "m__learning_rate": 0.014413697528610409,
+   "m__min_child_samples": 17,
+   "m__num_leaves": 38,
+   "m__reg_lambda": 12.370108840299013,
+   "m__subsample": 0.7035119926400067,
+   "m__subsample_freq": 1
+  },
+  "seconds": 63
+ },
+ "EBM": {
+  "cv_auc": 0.7946,
+  "cv_auc_sd": 0.0157,
+  "best_params": {
+   "interactions": 10,
+   "learning_rate": 0.014395239548966477,
+   "max_bins": 64,
+   "max_leaves": 3,
+   "min_samples_leaf": 20
+  },
+  "seconds": 192
+ }
+}

@@ -1,0 +1,284 @@
+{
+ "metrics": [
+  {
+   "model": "EBM",
+   "ROC-AUC": 0.8224,
+   "AUC CI low": 0.7924,
+   "AUC CI high": 0.8488,
+   "Accuracy": 0.7428,
+   "Precision": 0.7545,
+   "Recall": 0.7806,
+   "F1": 0.7673,
+   "Brier": 0.1717,
+   "CV AUC": 0.7946,
+   "Train AUC": 0.8376,
+   "Overfit gap": 0.0152
+  },
+  {
+   "model": "Logistic Regression",
+   "ROC-AUC": 0.8212,
+   "AUC CI low": 0.792,
+   "AUC CI high": 0.8506,
+   "Accuracy": 0.7415,
+   "Precision": 0.7551,
+   "Recall": 0.776,
+   "F1": 0.7654,
+   "Brier": 0.1722,
+   "CV AUC": 0.7907,
+   "Train AUC": 0.8085,
+   "Overfit gap": -0.0128
+  },
+  {
+   "model": "Decision Tree",
+   "ROC-AUC": 0.7919,
+   "AUC CI low": 0.7602,
+   "AUC CI high": 0.8229,
+   "Accuracy": 0.7127,
+   "Precision": 0.7065,
+   "Recall": 0.806,
+   "F1": 0.753,
+   "Brier": 0.1853,
+   "CV AUC": 0.7608,
+   "Train AUC": 0.7921,
+   "Overfit gap": 0.0002
+  },
+  {
+   "model": "Random Forest",
+   "ROC-AUC": 0.8244,
+   "AUC CI low": 0.7952,
+   "AUC CI high": 0.8515,
+   "Accuracy": 0.7365,
+   "Precision": 0.7419,
+   "Recall": 0.7898,
+   "F1": 0.7651,
+   "Brier": 0.1732,
+   "CV AUC": 0.795,
+   "Train AUC": 0.9286,
+   "Overfit gap": 0.1041
+  },
+  {
+   "model": "XGBoost",
+   "ROC-AUC": 0.8193,
+   "AUC CI low": 0.7886,
+   "AUC CI high": 0.8475,
+   "Accuracy": 0.734,
+   "Precision": 0.745,
+   "Recall": 0.776,
+   "F1": 0.7602,
+   "Brier": 0.1729,
+   "CV AUC": 0.7956,
+   "Train AUC": 0.9246,
+   "Overfit gap": 0.1053
+  },
+  {
+   "model": "LightGBM",
+   "ROC-AUC": 0.82,
+   "AUC CI low": 0.7896,
+   "AUC CI high": 0.8489,
+   "Accuracy": 0.7415,
+   "Precision": 0.7517,
+   "Recall": 0.7829,
+   "F1": 0.767,
+   "Brier": 0.1727,
+   "CV AUC": 0.7945,
+   "Train AUC": 0.9147,
+   "Overfit gap": 0.0947
+  }
+ ],
+ "pairs_vs_ebm": [
+  {
+   "model": "Logistic Regression",
+   "dAUC (EBM - model)": 0.001,
+   "CI low": -0.0099,
+   "CI high": 0.0107,
+   "significant": false
+  },
+  {
+   "model": "Decision Tree",
+   "dAUC (EBM - model)": 0.0302,
+   "CI low": 0.0132,
+   "CI high": 0.0482,
+   "significant": true
+  },
+  {
+   "model": "Random Forest",
+   "dAUC (EBM - model)": -0.0018,
+   "CI low": -0.0103,
+   "CI high": 0.0063,
+   "significant": false
+  },
+  {
+   "model": "XGBoost",
+   "dAUC (EBM - model)": 0.0034,
+   "CI low": -0.0047,
+   "CI high": 0.0114,
+   "significant": false
+  },
+  {
+   "model": "LightGBM",
+   "dAUC (EBM - model)": 0.0026,
+   "CI low": -0.0059,
+   "CI high": 0.0106,
+   "significant": false
+  }
+ ],
+ "ebm_importance": {
+  "fan_hours_week": 0.2447,
+  "household_members": 0.1993,
+  "area": 0.1462,
+  "n_washing_machines": 0.1359,
+  "n_fridges": 0.1222,
+  "n_appliances": 0.1097,
+  "rooms": 0.0873,
+  "n_fans": 0.0848,
+  "children_under_15": 0.0835,
+  "n_computers": 0.0766,
+  "hot_water": 0.0728,
+  "n_bulbs": 0.0716,
+  "n_electric_cooking": 0.0691,
+  "bedrooms": 0.0685,
+  "socio_economic_class": 0.0659,
+  "ac_hours_week": 0.0563,
+  "n_inverter_acs": 0.056,
+  "floor_area_sqft": 0.0544,
+  "n_acs": 0.0542,
+  "built_period": 0.0535,
+  "household_members & n_fridges": 0.0511,
+  "n_tvs": 0.0505,
+  "lighting_kwh_week": 0.0491,
+  "home_business": 0.0485,
+  "household_members & n_bulbs": 0.0481,
+  "built_period & fan_hours_week": 0.047,
+  "house_type": 0.0453,
+  "n_bulbs & lighting_kwh_week": 0.0442,
+  "avg_hours_at_home & fan_hours_week": 0.0411,
+  "members_working & fan_hours_week": 0.0387,
+  "avg_hours_at_home": 0.0377,
+  "n_kettles": 0.037,
+  "n_acs & fan_hours_week": 0.0347,
+  "n_rice_cookers": 0.0346,
+  "n_irons": 0.0311,
+  "avg_hours_at_home & n_fans": 0.0309,
+  "n_appliances & home_business": 0.0309,
+  "adults_65_plus": 0.029,
+  "avg_hours_at_home & n_inverter_acs": 0.0279,
+  "electric_cooking": 0.0242,
+  "members_working": 0.0186,
+  "solar_on_grid": 0.0158,
+  "backup_generator": 0.0158,
+  "n_water_heaters": 0.0158,
+  "n_water_pumps": 0.0125,
+  "renting": 0.0114,
+  "n_freezers": 0.0092,
+  "solar": 0.0033
+ },
+ "interactions": [
+  "household_members & n_fridges",
+  "household_members & n_bulbs",
+  "built_period & fan_hours_week",
+  "n_bulbs & lighting_kwh_week",
+  "avg_hours_at_home & fan_hours_week"
+ ],
+ "domain_checks": {
+  "More AC hours raise the odds (0 vs 40 h/week)": true,
+  "Larger households use more (2 vs 6 members)": true,
+  "Grid-powered water heating raises use (vs none)": true,
+  "On-grid solar lowers metered use (expected; NOT observed)": false,
+  "Higher socio-economic class uses more (A vs E)": true,
+  "Bigger floor area uses more (600 vs 2000 sq ft)": true
+ },
+ "local": {
+  "likely high user": {
+   "p_ebm": 0.9995612274744236,
+   "actual": 1,
+   "median_kwh": 873.5,
+   "top_ebm": {
+    "inverter ACs": 0.95,
+    "air conditioners": 0.775,
+    "TVs": 0.651,
+    "avg hours at home / week \u00d7 inverter ACs": 0.617,
+    "washing machines": 0.554,
+    "air conditioners \u00d7 fan hours / week": 0.501,
+    "household members": 0.472,
+    "oven/microwave/cooktop": 0.358
+   },
+   "rho_ebm_shap": 0.6942772732246416
+  },
+  "borderline": {
+   "p_ebm": 0.5007515341147324,
+   "actual": 0,
+   "median_kwh": 73.0,
+   "top_ebm": {
+    "fan hours / week": -0.471,
+    "bulbs": 0.327,
+    "CEB/LECO service area": -0.279,
+    "bedrooms": 0.186,
+    "rooms": 0.149,
+    "household members": -0.141,
+    "built period (0 = pre-1980 \u2026 5 = 2020+) \u00d7 fan hours / week": -0.139,
+    "washing machines": 0.109
+   },
+   "rho_ebm_shap": 0.8645366013787066
+  }
+ },
+ "agreement": {
+  "rho_ebm_shap_global": 0.8212058212058211,
+  "top10_overlap": 7,
+  "rho_ebm_lime_local_median": 0.6471167523799102,
+  "lime_top_feature_stability": "3/5 (home_business)"
+ },
+ "fairness": [
+  {
+   "SEC": "A",
+   "n": 166,
+   "actual high-user rate": 0.777,
+   "predicted rate": 0.831,
+   "recall": 0.93,
+   "precision": 0.87,
+   "AUC": 0.855
+  },
+  {
+   "SEC": "B",
+   "n": 175,
+   "actual high-user rate": 0.526,
+   "predicted rate": 0.686,
+   "recall": 0.87,
+   "precision": 0.667,
+   "AUC": 0.808
+  },
+  {
+   "SEC": "C",
+   "n": 268,
+   "actual high-user rate": 0.541,
+   "predicted rate": 0.534,
+   "recall": 0.71,
+   "precision": 0.72,
+   "AUC": 0.767
+  },
+  {
+   "SEC": "D",
+   "n": 140,
+   "actual high-user rate": 0.379,
+   "predicted rate": 0.293,
+   "recall": 0.566,
+   "precision": 0.732,
+   "AUC": 0.787
+  },
+  {
+   "SEC": "E",
+   "n": 48,
+   "actual high-user rate": 0.292,
+   "predicted rate": 0.125,
+   "recall": 0.357,
+   "precision": 0.833,
+   "AUC": 0.834
+  }
+ ],
+ "ebm_params": {
+  "interactions": 10,
+  "learning_rate": 0.014395239548966477,
+  "max_bins": 64,
+  "max_leaves": 3,
+  "min_samples_leaf": 20
+ }
+}

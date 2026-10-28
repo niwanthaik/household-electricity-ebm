@@ -1,0 +1,35 @@
+{
+ "households_surveyed": 4063,
+ "monthly_readings": 101575,
+ "dropped_too_few_months_or_mostly_zero": 80,
+ "households_used": 3983,
+ "high_user_rate": 0.5430579964850615,
+ "median_kwh": 96.0,
+ "kwh_quartiles": [
+  63.0,
+  96.0,
+  146.0
+ ],
+ "missing": {
+  "floor_area_sqft": 26,
+  "built_period": 317
+ },
+ "survey_period": [
+  "2023-12-09",
+  "2024-10-24"
+ ],
+ "split": {
+  "train": {
+   "rows": 2788,
+   "high_user_rate": 0.543
+  },
+  "val": {
+   "rows": 398,
+   "high_user_rate": 0.543
+  },
+  "test": {
+   "rows": 797,
+   "high_user_rate": 0.543
+  }
+ }
+}

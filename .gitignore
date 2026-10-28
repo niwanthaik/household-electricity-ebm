@@ -1,0 +1,5 @@
+# Raw ReCon SL files are not redistributed: download from IEEE DataPort into data/raw/
+data/raw/
+__pycache__/
+*.log
+.venv/
